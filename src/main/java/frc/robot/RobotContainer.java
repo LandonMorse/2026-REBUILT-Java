@@ -167,70 +167,33 @@ public class RobotContainer {
                 auxDriver.x().whileTrue(intakeSubsystem.intakeOn(0.8));
                 auxDriver.x().onFalse(intakeSubsystem.intakeOff());
                 auxDriver.b().onTrue(intakeSubsystem.intakeOn(0.7));
-
+                //system Clear
                 auxDriver.leftTrigger().whileTrue(shooterSubsystem.shootBack(.7));
                 auxDriver.leftTrigger().onTrue(intakeSubsystem.intakeOn(0.7));
                 auxDriver.leftTrigger().onFalse(shooterSubsystem.stopSpin());
                 auxDriver.leftTrigger().onFalse(intakeSubsystem.intakeOff());
                 auxDriver.leftTrigger().onTrue(shooterSubsystem.kickT(.1));
                 auxDriver.leftTrigger().onFalse(shooterSubsystem.KickOffT());
-
+                //Arm Buttons 
                 auxDriver.povDown().onTrue(armSubsystemKraken.armDown().withTimeout(2.0));
                 auxDriver.povUp().onTrue(armSubsystemKraken.armUp().withTimeout(3.3));
-                // arm buttons
-
-                // auxDriver.povUp().onTrue(armSubsystemKraken.ArmIntake());
-                // auxDriver.povLeft().onTrue(armSubsystemKraken.armToNeutralLevel());
-
-                // auxDriver.povUp().onTrue(armSubsystemKraken.armMoveToZeroDegree());
-                // auxDriver.povLeft().onTrue(armSubsystemKraken.armToNine());
-
-                // auxDriver.povDown().onTrue(armSubsystemKraken.armDown());
-                // auxDriver.povRight().onTrue(armSubsystemKraken.armUp());
-                // auxDriver.povCenter().onTrue(armSubsystemKraken.stopArm());
-
-                // auxDriver.povRight().onTrue(armSubsystemKraken.armSetPoints(-8));
-                // auxDriver.povUp().onTrue(armSubsystemKraken.armToNeutralLevel());
-                // auxDriver.povLeft().onTrue(armSubsystemKraken.ArmIntake());
-                // auxDriver.povDown().onTrue(armSubsystemKraken.ArmWiggle());
-                // auxDriver.a().whileTrue(drivetrain.applyRequest(() -> brake));
-                // system clear
-
-                Driver.rightBumper().onTrue(shooterSubsystem.kickT(.1));
-                Driver.rightBumper().onFalse(shooterSubsystem.KickOffT());
 
                 auxDriver.leftBumper().onTrue(shooterSubsystem.kickT(-.1));
                 auxDriver.leftBumper().onFalse(shooterSubsystem.KickOffT());
 
-                // auxDriver.a().onTrue(armSubsystemKraken.ArmIntake());
-                // auxDriver.a().onFalse(armSubsystemKraken.armStop());
                 // 50 percent wimpy 10ft
                 // 60 is awsome at 10ft
                 // 70 to much at 10ft
                 // shooter button
                 // this is how it should be do not change this to be on the driver controller
                 // thats stupid dont listin to them
-
                 auxDriver.rightTrigger().whileTrue(shooterSubsystem.Shoot(Constants.SPEED_OF_SHOOTER_LEFT_FACE));
 
                 auxDriver.rightTrigger().onFalse(shooterSubsystem.stopSpin());
                 auxDriver.a().whileTrue(shooterSubsystem.pulseKick().withTimeout(Constants.KICK_WHEEL_TIMEOUT)
                                 .andThen(new WaitCommand(1.5)).repeatedly());
                 auxDriver.a().onFalse(shooterSubsystem.KickOffT());
-                // auxDriver.povDown().onTrue(shooterSubsystem.autoShoot());
-
-                // auxDriver.y().whileTrue(shooterSubsystem.Shoot(visionPoseEstimator.distanceToMotorSpeed()));
-                // auxDriver.y().onFalse(shooterSubsystem.stopSpin());
-                // auxDriver.rightTrigger().whileTrue(shooterSubsystem.spinMotor(.75));
-                // auxDriver.rightTrigger().onFalse(shooterSubsystem.stopSpin());
-                // buttton for motor2
-                // auxDriver.rightTrigger().whileTrue(shooterSubsystem.spinMotor2(.7));
-                // auxDriver.rightTrigger().onFalse(shooterSubsystem.stopSpin2());
-                // all climber stuff
-                // Driver.povUp().onTrue(ClimberSubsystem.linearActuatorIn());
-                // Driver.povDown().onTrue(ClimberSubsystem.linearActuatorOut());
-                // Driver.y().onTrue(ClimberSubsystem.ClimbUp());
-                // Driver.a().onTrue(ClimberSubsystem.climbDown());
+                
                 Driver.b().whileTrue(drivetrain
                                 .applyRequest(() -> point.withModuleDirection(
                                                 new Rotation2d(Driver.getLeftY(), Driver.getLeftX()))));
@@ -246,24 +209,6 @@ public class RobotContainer {
                 Driver.a().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
 
                 drivetrain.registerTelemetry(logger::telemeterize);
-
-                // Logic: While the target is in range, rumble. When it leaves range, stop.
-                // new Trigger(visionPoseEstimator::isAnyCameraInRange)
-                // .whileTrue(
-                // Commands.runEnd(
-                // () -> {
-                // Driver.getHID().setRumble(RumbleType.kBothRumble, 0.2);
-                // //shooterSubsystem.setMotorSpeedFromDistance((VisionPoseEstimator.getInstance().getDistanceToTarget()));
-                // //VisionPoseEstimator.getInstance().distanceToMotorSpeed();
-                // },
-                // () -> {
-                // Driver.getHID().setRumble(RumbleType.kBothRumble, 0.0);
-                // //shooterSubsystem.setMotorSpeedFromDistance((VisionPoseEstimator.getInstance().getDistanceToTarget()));
-                // }
-                // )
-                // .ignoringDisable(true) // Allows you to test this while the robot is
-                // disabled!
-                // );
 
         }
 }
